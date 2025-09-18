@@ -1,5 +1,4 @@
-
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html dir="rtl" lang="ar">
 <head>
     <meta charset="UTF-8">
@@ -33,19 +32,26 @@
             position: sticky;
             top: 0;
             z-index: 1000;
+            padding: 0.8rem 0;
         }
 
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 5%;
+            padding: 0 5%;
             max-width: 1400px;
             margin: 0 auto;
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
         .logo {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: bold;
             color: #E85A4F;
             display: flex;
@@ -53,8 +59,12 @@
         }
 
         .logo::before {
-            content: "📚";
+            content: "";
             margin-left: 10px;
+            width: 35px;
+            height: 35px;
+            background: url('logo.png') no-repeat center;
+            background-size: contain;
         }
 
         .nav-links {
@@ -74,31 +84,97 @@
             color: #E85A4F;
         }
 
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .menu-icon {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .menu-icon:hover {
+            background: #f0f0f0;
+        }
+
+        .profile-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #E85A4F;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .profile-icon:hover {
+            transform: scale(1.05);
+        }
+
         /* Banner Section */
         .banner {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('your-banner-image.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             color: white;
-            text-align: center;
-            padding: 4rem 5%;
-            margin-bottom: 3rem;
+            padding: 2.5rem 5%;
+            margin-bottom: 2rem;
+            position: relative;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
         }
 
         .banner-content {
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .banner-logo {
+            position: absolute;
+            top: 2rem;
+            right: 5%;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .banner-logo .logo::before {
+            width: 30px;
+            height: 30px;
+            background: url('logo.png') no-repeat center;
+            background-size: contain;
         }
 
         .banner h1 {
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-align: right;
         }
 
         .banner p {
-            font-size: 1.3rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
+            font-size: 1.1rem;
+            opacity: 0.95;
+            max-width: 500px;
+            text-align: right;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
         /* Container */
@@ -391,8 +467,31 @@
                 display: none;
             }
             
+            .nav-right {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .banner {
+                padding: 2rem 5%;
+                min-height: 150px;
+            }
+            
             .banner h1 {
-                font-size: 2.5rem;
+                font-size: 2rem;
+            }
+            
+            .banner p {
+                font-size: 1rem;
+            }
+            
+            .banner-logo {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-bottom: 1rem;
+                align-self: flex-end;
             }
             
             .section-header {
@@ -432,18 +531,29 @@
     <!-- Header -->
     <header>
         <nav>
-            <div class="logo">قصصي</div>
-            <ul class="nav-links">
-                <li><a href="#home">الرئيسية</a></li>
-                <li><a href="#categories">التصنيفات</a></li>
-                <li><a href="#about">عن الموقع</a></li>
-                <li><a href="#contact">اتصل بنا</a></li>
-            </ul>
+            <div class="nav-right">
+                <div class="logo">قصصي</div>
+                <ul class="nav-links">
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li><a href="#categories">التصنيفات</a></li>
+                    <li><a href="#about">عن الموقع</a></li>
+                    <li><a href="#contact">اتصل بنا</a></li>
+                </ul>
+            </div>
+            <div class="nav-left">
+                <button class="menu-icon" title="المزيد">☰</button>
+                <div class="profile-icon" title="الحساب">ق</div>
+            </div>
         </nav>
     </header>
 
     <!-- Banner -->
     <section class="banner" id="home">
+        <!-- شعار الموقع في البنر -->
+        <div class="banner-logo">
+            <div class="logo">قصصي</div>
+        </div>
+        
         <div class="banner-content">
             <h1>مرحباً بك في عالم قصصي</h1>
             <p>اكتشف أجمل القصص المصورة العربية واستمتع بقراءة حكايات مذهلة من كتّاب مبدعين</p>
