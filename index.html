@@ -1,110 +1,64 @@
 <!DOCTYPE html>
-<html dir="rtl" lang="ar">
+<html lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>قصصي - موقع القصص المصورة</title>
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png">
-    <link rel="shortcut icon" href="favicon.ico">
-    
-    <style>
-        * {margin: 0; padding: 0; box-sizing: border-box;}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>قصصي</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f8f9fa;
-            color: #333;
-            line-height: 1.6;
-        }
+    /* البنر الجديد */
+    .banner {
+      background-color: #ddd; /* المساحة الرمادية */
+      color: #333;
+      padding: 60px 20px;
+      text-align: center;
+      position: relative;
+    }
 
-        /* Banner = Header */
-        .banner {
-            background: #555; /* اللون الرمادي */
-            color: white;
-            padding: 1rem 5%;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            min-height: 70px;
-        }
+    /* اللوجو */
+    .banner .logo {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 50px;
+      height: auto;
+    }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #fff;
-            display: flex;
-            align-items: center;
-        }
+    /* زر القوائم */
+    .banner .menu-icon {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 28px;
+      cursor: pointer;
+    }
 
-        .logo::before {
-            content: "";
-            margin-left: 10px;
-            width: 35px;
-            height: 35px;
-            background: url('logo.png') no-repeat center;
-            background-size: contain;
-        }
+    /* نص الترحيب */
+    .banner h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
 
-        .menu-icon {
-            background: none;
-            border: none;
-            font-size: 1.8rem;
-            cursor: pointer;
-            color: white;
-        }
-
-        /* Banner Content */
-        .banner-content {
-            text-align: center;
-            padding: 3rem 5%;
-            background: #777;
-            color: white;
-        }
-
-        .banner-content h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .banner-content p {
-            font-size: 1.2rem;
-        }
-
-        /* باقي التنسيقات من الكود القديم تبقى كما هي */
-    </style>
+    .banner p {
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Banner بدل الهيدر -->
-    <section class="banner">
-        <div class="logo">قصصي</div>
-        <button class="menu-icon" title="القائمة">☰</button>
-    </section>
-
-    <!-- Banner Content -->
-    <section class="banner-content" id="home">
-        <h1>مرحباً بك في عالم قصصي</h1>
-        <p>اكتشف أجمل القصص المصورة العربية واستمتع بقراءة حكايات مذهلة من كتّاب مبدعين</p>
-    </section>
-
-    <!-- Main Content -->
-    <div class="container">
-        <!-- المحتوى الآخر مثل ما هو -->
-    </div>
-
-    <footer>
-        <p>&copy; 2025 موقع قصصي - جميع الحقوق محفوظة</p>
-        <p>منصة عربية لنشر ومشاركة القصص المصورة</p>
-    </footer>
+  <!-- البنر الجديد -->
+  <header class="banner">
+    <span class="menu-icon">☰</span>
+    <img src="logo.png" alt="شعار الموقع" class="logo">
+    <h1>مرحبًا بكم في قصصي</h1>
+    <p>منصة للقصص العربية والرسوم المصورة</p>
+  </header>
 
 </body>
 </html>
