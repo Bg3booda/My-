@@ -1,48 +1,82 @@
 body {
   margin: 0;
-  font-family: 'Arial', sans-serif;
-  background: #f9f9f9;
-  color: #333;
+  font-family: Arial, sans-serif;
+  background: #111;
+  color: #fff;
 }
 
-/* البنر */
-.banner {
-  background: #777;
-  color: white;
-  text-align: center;
-  padding: 50px 20px;
+/* رأس الصفحة */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #333;
+  padding: 15px;
+  font-size: 20px;
 }
-.banner h1 {
-  margin: 0;
-  font-size: 28px;
+.logo {
+  font-weight: bold;
+  color: #fff;
 }
-.banner h2 {
-  margin: 10px 0;
-  font-size: 36px;
+.menu-icon {
+  cursor: pointer;
+  font-size: 24px;
 }
-.banner p {
+
+/* القائمة الرئيسية */
+.main-nav {
+  display: flex;
+  justify-content: space-around;
+  background: #222;
+  padding: 10px 0;
+}
+.main-nav a {
+  color: #fff;
+  text-decoration: none;
   font-size: 16px;
 }
+.main-nav a:hover {
+  color: #ffcc00;
+}
 
-/* قسم أفضل الأعمال */
-.best-works {
-  padding: 30px 20px;
-  text-align: center;
+/* الأقسام */
+.section {
+  padding: 20px 10px;
 }
-.best-works h3 {
-  font-size: 24px;
-  margin-bottom: 20px;
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
 }
-.works-grid {
+.section-header h2 {
+  margin: 0;
+  font-size: 20px;
+}
+.more {
+  font-size: 14px;
+  color: #ffcc00;
+  text-decoration: none;
+}
+
+/* شريط عرض أفقي */
+.scroll-list {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  padding-bottom: 10px;
+}
+.item {
+  min-width: 120px;
+  height: 160px;
+  background: #444;
+  border-radius: 8px;
   display: flex;
   justify-content: center;
-  gap: 15px;
-  flex-wrap: wrap;
+  align-items: center;
 }
-.work {
-  background: white;
-  border-radius: 8px;
-  padding: 20px;
-  min-width: 100px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+.item.big {
+  min-width: 160px;
+  height: 200px;
+  background: #666;
 }
