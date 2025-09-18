@@ -1,53 +1,407 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html dir="rtl" lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>قصصي</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>قصصي - موقع القصص المصورة</title>
+
+  <!-- فافيكون (ضع الملفات في جذر المشروع) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="shortcut icon" href="favicon.ico">
+
+  <style>
+    :root{
+      --bg:#f3f4f6;
+      --text:#222;
+      --accent:#E85A4F;
+      --dark:#111;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.4;
+    }
+
+    /* ======= BANNER (المربع الرمادي) ======= */
+    .banner{
+      background:#8b8b8b;               /* لون الرمادي الذي طلبته */
+      color:#fff;
+      min-height:250px;
+      padding:18px 5%;
+      position:relative;
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+
+    /* أعلى البنر: أيقونة القائمة يسار و الشعار يمين داخل البنر */
+    .banner-top{
+      position:absolute;
+      top:12px;
+      left:18px;   /* الأيقونة على اليسار (في RTL) */
+      right:18px;  /* الشعار على اليمين */
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      pointer-events:none; /* حتى لا يؤثر على النص الرئيسي */
+    }
+    .menu-btn{
+      pointer-events:auto;
+      background:#fff;
+      color:#222;
+      border-radius:8px;
+      border:none;
+      padding:8px 10px;
+      font-size:20px;
+      cursor:pointer;
+      box-shadow:0 6px 18px rgba(0,0,0,0.15);
+    }
+    .logo{
+      pointer-events:auto;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:700;
+      font-size:22px;
+      color:#fff;
+      background: rgba(0,0,0,0.12);
+      padding:6px 10px;
+      border-radius:10px;
+      box-shadow:0 4px 14px rgba(0,0,0,0.12);
+    }
+    /* لو عندك صورة لشعار استبدل الخلفية: */
+    .logo img{ width:34px; height:34px; object-fit:contain; border-radius:6px; }
+
+    /* محتوى البنر: العنوان والوصف (مركّز إلى اليمين) */
+    .banner .banner-content{
+      max-width:1000px;
+      margin-left:auto; /* يضع المحتوى إلى اليمين في RTL */
+      text-align:right;
+      z-index:1;
+    }
+    .banner h1{
+      font-size:36px;
+      margin:0 0 8px 0;
+      line-height:1.05;
+      font-weight:800;
+      text-shadow:0 3px 10px rgba(0,0,0,0.25);
+    }
+    .banner p{
+      margin:0;
+      opacity:0.95;
+      font-size:16px;
+      max-width:650px;
+    }
+
+    /* ====== شريط القائمة الرئيسي تحت البنر ====== */
+    .main-nav{
+      display:flex;
+      gap:20px;
+      justify-content:center;
+      align-items:center;
+      background:transparent;
+      padding:12px 4%;
+      border-bottom:1px solid rgba(0,0,0,0.05);
+    }
+    .main-nav a{
+      color:var(--text);
+      text-decoration:none;
+      font-weight:600;
+      padding:8px 12px;
+      border-radius:8px;
+    }
+    .main-nav a:hover{ background:rgba(0,0,0,0.04); }
+
+    /* ====== أقسام المحتوى ====== */
+    .container{ max-width:1200px; margin:28px auto; padding:0 4% }
+
+    .section{ margin-bottom:28px }
+    .section .section-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:14px;
+      gap:12px;
+    }
+    .section-header h2{ margin:0; font-size:22px }
+    .section-header .more{
+      color:var(--accent);
+      text-decoration:none;
+      font-weight:700;
+      font-size:14px;
+    }
+
+    /* ====== Carousel (عرض أفقي بالتمرير) ====== */
+    .carousel{
+      display:flex;
+      gap:14px;
+      overflow-x:auto;
+      padding-bottom:6px;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+    }
+    .card{
+      flex:0 0 auto;
+      scroll-snap-align:center;
+      background:#fff;
+      border-radius:12px;
+      box-shadow:0 6px 18px rgba(10,10,10,0.06);
+      min-width:160px;
+      height:180px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:center;
+      padding:14px;
+      position:relative;
+      color:var(--dark);
+      overflow:hidden;
+    }
+    .card.large{
+      min-width:220px;
+      height:220px;
+      background:linear-gradient(180deg,#ffd6db,#ffb3b3);
+    }
+    .card .title{
+      font-weight:700;
+      font-size:15px;
+      text-align:center;
+      width:100%;
+    }
+    .card .thumb{
+      position:absolute;
+      inset:0;
+      background-size:cover;
+      background-position:center;
+      filter:brightness(0.85);
+    }
+    /* وضع شريط صغير للترقيم أو علامة */
+    .badge{
+      position:absolute;
+      top:10px;
+      left:10px;
+      background:rgba(0,0,0,0.6);
+      color:#fff;
+      font-size:12px;
+      padding:6px 8px;
+      border-radius:14px;
+    }
+
+    /* ====== Grid عند الضغط على عرض المزيد ====== */
+    .grid-full{ display:none; gap:14px; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); }
+    .grid-full .card{ height:220px; min-width:unset }
+
+    /* ====== أقسام التصنيفات ====== */
+    .categories{
+      display:grid;
+      gap:14px;
+      grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+    }
+    .category-card{
+      background:#fff;
+      border-radius:12px;
+      padding:16px;
+      box-shadow:0 6px 18px rgba(10,10,10,0.06);
+    }
+
+    /* ====== Footer بسيط ====== */
+    footer{ text-align:center; padding:24px; color:#666; font-size:13px; margin-top:24px }
+
+    /* ====== Responsive ====== */
+    @media (max-width:900px){
+      .banner h1{ font-size:30px }
+      .card.large{ min-width:180px; height:200px }
+    }
+    @media (max-width:560px){
+      .banner{ min-height:220px; padding:18px 6% 28px 6% }
+      .banner h1{ font-size:26px }
+      .main-nav{ overflow:auto; padding:10px 4% }
+      .card{ min-width:140px; height:160px }
+      .grid-full{ grid-template-columns:repeat(auto-fill,minmax(140px,1fr)) }
+    }
+
+    /* اخفاء scroll bar على Webkit لستايل أنظف (اختياري) */
+    .carousel::-webkit-scrollbar{ height:8px }
+    .carousel::-webkit-scrollbar-thumb{ background:rgba(0,0,0,0.12); border-radius:6px }
+  </style>
 </head>
 <body>
 
-  <!-- رأس الصفحة -->
-  <header class="topbar">
-    <div class="menu-icon">☰</div>
-    <div class="logo">قصصي</div>
+  <!-- البنر الرمادي: يحتوي الشعار والزر (قابل للتعديل) -->
+  <header class="banner" role="banner">
+    <div class="banner-top">
+      <!-- زر القائمة (ستضيف لاحقاً السلوك المطلوب) -->
+      <button class="menu-btn" aria-label="قائمة">☰</button>
+
+      <!-- شعار الموقع: استبدل الصورة إذا أردت -->
+      <div class="logo">
+        <!-- ضع صورة الشعار هنا إذا أردت -->
+        <!-- <img src="logo.png" alt="قصصي"> -->
+        قصصي
+      </div>
+    </div>
+
+    <div class="banner-content">
+      <h1>مرحباً بك في عالم قصصي</h1>
+      <p>اكتشف أجمل القصص المصوّرة العربية واستمتع بقراءة حكايات مُبدعة من كتّاب موهوبين.</p>
+    </div>
   </header>
 
-  <!-- القائمة الرئيسية -->
-  <nav class="main-nav">
-    <a href="#">الرئيسية</a>
-    <a href="#">التصنيفات</a>
-    <a href="#">عن الموقع</a>
-    <a href="#">اتصل بنا</a>
-  </nav>
+  <!-- شريط الروابط الرئيسي تحت البنر -->
+  <div class="main-nav" role="navigation" aria-label="قائمة رئيسية">
+    <a href="#home">الرئيسية</a>
+    <a href="#best-of-month">أفضل الأعمال</a>
+    <a href="#popular">الأكثر مشاهدة</a>
+    <a href="#categories">التصنيفات</a>
+    <a href="#contact">اتصل بنا</a>
+  </div>
 
-  <!-- أفضل الأعمال -->
-  <section class="section">
-    <div class="section-header">
-      <h2>أفضل الأعمال لهذا الشهر</h2>
-    </div>
-    <div class="scroll-list">
-      <div class="item big">عمل 1</div>
-      <div class="item big">عمل 2</div>
-      <div class="item big">عمل 3</div>
-      <div class="item big">عمل 4</div>
-    </div>
-  </section>
+  <!-- الحاوية الأساسية -->
+  <main class="container">
 
-  <!-- الأكثر مشاهدة -->
-  <section class="section">
-    <div class="section-header">
-      <h2>الأعمال الأكثر مشاهدة</h2>
-      <a href="#" class="more">عرض المزيد</a>
-    </div>
-    <div class="scroll-list">
-      <div class="item">عمل 1</div>
-      <div class="item">عمل 2</div>
-      <div class="item">عمل 3</div>
-      <div class="item">عمل 4</div>
-    </div>
-  </section>
+    <!-- قسم: أفضل الأعمال لهذا الشهر (أفقية - أكبر حجم) -->
+    <section id="best-of-month" class="section">
+      <div class="section-header">
+        <h2>أفضل الأعمال لهذا الشهر</h2>
+      </div>
+
+      <div class="carousel" id="bestCarousel" aria-label="أفضل الأعمال">
+        <!-- مثال بطاقات: استبدل الخلفيات/النصوص بالبيانات الفعلية -->
+        <div class="card large" style="background:#f7c6d0;">
+          <div class="badge">#1</div>
+          <div class="title">قصة رائعة 1</div>
+        </div>
+
+        <div class="card large" style="background:#ffd7a8;">
+          <div class="badge">#2</div>
+          <div class="title">قصة رائعة 2</div>
+        </div>
+
+        <div class="card large" style="background:#c9f0ff;">
+          <div class="badge">#3</div>
+          <div class="title">قصة رائعة 3</div>
+        </div>
+
+        <div class="card large" style="background:#d3e8c1;">
+          <div class="badge">#4</div>
+          <div class="title">قصة رائعة 4</div>
+        </div>
+
+        <!-- يمكنك إضافة حتى 10 أعمال هنا (كما طلبت) -->
+      </div>
+    </section>
+
+    <!-- قسم: الأكثر مشاهدة (أفقي + زر عرض المزيد) -->
+    <section id="popular" class="section">
+      <div class="section-header">
+        <h2>الأعمال الأكثر مشاهدة</h2>
+        <a href="#" class="more" id="togglePopular">عرض المزيد</a>
+      </div>
+
+      <!-- شريط أفقي مبدئي -->
+      <div class="carousel" id="popularCarousel" aria-label="الأكثر مشاهدة">
+        <div class="card" style="background:#fff;">
+          <div class="title">عمل شائع 1</div>
+        </div>
+        <div class="card" style="background:#fff;">
+          <div class="title">عمل شائع 2</div>
+        </div>
+        <div class="card" style="background:#fff;">
+          <div class="title">عمل شائع 3</div>
+        </div>
+        <div class="card" style="background:#fff;">
+          <div class="title">عمل شائع 4</div>
+        </div>
+      </div>
+
+      <!-- الشبكة التي تظهر عندما يضغط المستخدم "عرض المزيد" -->
+      <div class="grid-full" id="popularGrid" style="display:none; margin-top:12px; display:grid;">
+        <!-- هنا يمكن أن تضع كل الأعمال مرتبة بالشهرة -->
+        <div class="card"><div class="title">عمل شائع أ</div></div>
+        <div class="card"><div class="title">عمل شائع ب</div></div>
+        <div class="card"><div class="title">عمل شائع ج</div></div>
+        <div class="card"><div class="title">عمل شائع د</div></div>
+        <div class="card"><div class="title">عمل شائع هـ</div></div>
+        <div class="card"><div class="title">عمل شائع و</div></div>
+        <div class="card"><div class="title">عمل شائع ز</div></div>
+        <div class="card"><div class="title">عمل شائع ح</div></div>
+      </div>
+    </section>
+
+    <!-- قسم التصنيفات -->
+    <section id="categories" class="section">
+      <div class="section-header">
+        <h2>التصنيفات</h2>
+      </div>
+
+      <div class="categories">
+        <div class="category-card">
+          <h3>مغامرات</h3>
+          <p>نماذج موجزة للأعمال تحت هذا التصنيف.</p>
+        </div>
+
+        <div class="category-card">
+          <h3>خيال علمي</h3>
+          <p>نماذج موجزة للأعمال تحت هذا التصنيف.</p>
+        </div>
+
+        <div class="category-card">
+          <h3>كوميديا</h3>
+          <p>نماذج موجزة للأعمال تحت هذا التصنيف.</p>
+        </div>
+
+        <div class="category-card">
+          <h3>رومانسي</h3>
+          <p>نماذج موجزة للأعمال تحت هذا التصنيف.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    &copy; 2025 موقع قصصي — جميع الحقوق محفوظة
+  </footer>
+
+  <script>
+    // تبديل بين شريط "الأكثر مشاهدة" و الشبكة الكاملة عند الضغط على عرض المزيد
+    (function(){
+      const btn = document.getElementById('togglePopular');
+      const carousel = document.getElementById('popularCarousel');
+      const grid = document.getElementById('popularGrid');
+
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
+        const shown = grid.style.display !== 'none' && grid.style.display !== '';
+        if(shown){
+          grid.style.display = 'none';
+          carousel.style.display = 'flex';
+          btn.textContent = 'عرض المزيد';
+        } else {
+          grid.style.display = 'grid';
+          carousel.style.display = 'none';
+          btn.textContent = 'عرض أقل';
+          // سلاسة التمرير إلى القسم
+          grid.scrollIntoView({behavior:'smooth', block:'start'});
+        }
+      });
+
+      // زر القائمة — يفتح/يغلق ناف منبثق (يمكنك تعديل السلوك)
+      const menuBtn = document.querySelector('.menu-btn');
+      menuBtn.addEventListener('click', function(){
+        // هنا يمكنك فتح لوحة جانبية أو قائمة منبثقة
+        alert('اضغطت زر القائمة — ضع هنا كود فتح القائمة الجانبية');
+      });
+    })();
+  </script>
 
 </body>
 </html>
