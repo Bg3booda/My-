@@ -3,9 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>قصصي - موقع القصص المصورة</title>
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <title>قصصي - الصفحة الرئيسية</title>
+
   <style>
     :root{
       --bg:#f3f4f6; --text:#222; --accent:#E85A4F; --card-shadow: 0 6px 18px rgba(10,10,10,0.06);
@@ -13,7 +12,7 @@
     *{box-sizing:border-box}
     body{ margin:0; font-family:"Segoe UI", Tahoma, Arial, sans-serif; background:var(--bg); color:var(--text) }
 
-    /* ===== Banner (المربع الرمادي) ===== */
+    /* Banner */
     .banner{ background:#8b8b8b; color:#fff; min-height:260px; padding:18px 5%; position:relative; display:flex; flex-direction:column; justify-content:center; }
     .banner-top{ position:absolute; top:12px; left:16px; right:16px; display:flex; justify-content:space-between; align-items:center; pointer-events:none; }
     .menu-btn{ pointer-events:auto; background:#fff; color:#222; border-radius:8px; border:none; padding:8px 10px; font-size:20px; cursor:pointer; box-shadow:0 6px 18px rgba(0,0,0,0.15); }
@@ -35,18 +34,17 @@
     .section-header h2{ margin:0; font-size:22px }
     .more-btn{ color:var(--accent); text-decoration:none; font-weight:700; cursor:pointer }
 
-    /* carousel base */
+    /* carousel */
     .carousel{ display:flex; gap:14px; overflow-x:auto; padding-bottom:8px; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; }
     .card{ flex:0 0 auto; scroll-snap-align:center; background:#fff; border-radius:12px; box-shadow:var(--card-shadow); min-width:150px; height:170px; display:flex; align-items:flex-end; justify-content:center; padding:12px; position:relative; color:var(--text); overflow:hidden; }
     .card .title{ font-weight:700; font-size:14px; text-align:center; width:100% }
 
-    /* BEST (10 items) bigger */
-    .card.best{ min-width:260px; height:260px; font-size:16px }
-    .card.best .title{ font-size:18px }
+    /* best (10 items) bigger */
+    .card.best{ min-width:220px; height:240px; font-size:16px }
+    .card.best .title{ font-size:16px }
     .badge{ position:absolute; top:10px; left:10px; background:rgba(0,0,0,0.6); color:#fff; padding:6px 9px; border-radius:14px; font-size:12px }
 
-    /* thumbnails by background-image or inline element */
-    .thumb{ position:absolute; inset:0; background-size:cover; background-position:center; filter:brightness(0.8); }
+    .thumb{ position:absolute; inset:0; background-size:cover; background-position:center; filter:brightness(0.78); }
     .card .overlay{ position:relative; z-index:2 }
 
     /* grid full view (hidden by default) */
@@ -60,15 +58,15 @@
     footer{ text-align:center; padding:24px; color:#666; font-size:13px; margin-top:24px }
 
     /* responsive */
-    @media (max-width:900px){ .banner h1{ font-size:30px } .card.best{ min-width:200px; height:220px } }
+    @media (max-width:900px){ .banner h1{ font-size:30px } .card.best{ min-width:180px; height:200px } }
     @media (max-width:560px){
       .banner{ min-height:220px; padding:16px 6% 28px 6% }
       .banner h1{ font-size:26px }
+      .main-nav{ overflow:auto; padding:10px 4% }
       .card{ min-width:140px; height:150px }
       .grid{ grid-template-columns:repeat(auto-fill,minmax(140px,1fr)) }
     }
 
-    /* scrollbar small style */
     .carousel::-webkit-scrollbar{ height:8px } .carousel::-webkit-scrollbar-thumb{ background:rgba(0,0,0,0.12); border-radius:6px }
   </style>
 </head>
@@ -82,14 +80,14 @@
     </div>
     <div class="banner-content">
       <h1>مرحباً بك في عالم قصصي</h1>
-      <p>اكتشف أجمل القصص المصوّرة العربية — تابع الأفضل واقرأ الجديد بسهولة.</p>
+      <p>اكتشف أجمل القصص المصوّرة العربية — الأفضل معروض أولاً.</p>
     </div>
   </header>
 
   <!-- MAIN NAV -->
   <div class="main-nav" role="navigation" aria-label="القائمة الرئيسية">
     <a href="#home">الرئيسية</a>
-    <a href="#best">أفضل الأعمال</a>
+    <a href="#best">الأفضل</a>
     <a href="#popular">الأكثر مشاهدة</a>
     <a href="#categories">التصنيفات</a>
     <a href="#contact">اتصل بنا</a>
@@ -102,69 +100,29 @@
       <div class="section-header"><h2>أفضل الأعمال لهذا الشهر</h2></div>
 
       <div class="carousel" id="bestCarousel" aria-label="أفضل الأعمال">
-        <!-- ضع هنا 10 أعمال - استبدل النصوص و الخلفيات بالصور الحقيقية -->
-        <div class="card best" style="background:#ffd7d7;">
-          <div class="badge">#1</div>
-          <div class="overlay"><div class="title">قصة ممتازة 1</div></div>
-        </div>
-
-        <div class="card best" style="background:#ffd9b3;">
-          <div class="badge">#2</div>
-          <div class="overlay"><div class="title">قصة ممتازة 2</div></div>
-        </div>
-
-        <div class="card best" style="background:#c9f0ff;">
-          <div class="badge">#3</div>
-          <div class="overlay"><div class="title">قصة ممتازة 3</div></div>
-        </div>
-
-        <div class="card best" style="background:#d3e8c1;">
-          <div class="badge">#4</div>
-          <div class="overlay"><div class="title">قصة ممتازة 4</div></div>
-        </div>
-
-        <div class="card best" style="background:#f7d6ff;">
-          <div class="badge">#5</div>
-          <div class="overlay"><div class="title">قصة ممتازة 5</div></div>
-        </div>
-
-        <div class="card best" style="background:#e6f7d9;">
-          <div class="badge">#6</div>
-          <div class="overlay"><div class="title">قصة ممتازة 6</div></div>
-        </div>
-
-        <div class="card best" style="background:#ffe0b3;">
-          <div class="badge">#7</div>
-          <div class="overlay"><div class="title">قصة ممتازة 7</div></div>
-        </div>
-
-        <div class="card best" style="background:#bfe8ff;">
-          <div class="badge">#8</div>
-          <div class="overlay"><div class="title">قصة ممتازة 8</div></div>
-        </div>
-
-        <div class="card best" style="background:#f8cdd7;">
-          <div class="badge">#9</div>
-          <div class="overlay"><div class="title">قصة ممتازة 9</div></div>
-        </div>
-
-        <div class="card best" style="background:#dfe7ff;">
-          <div class="badge">#10</div>
-          <div class="overlay"><div class="title">قصة ممتازة 10</div></div>
-        </div>
+        <!-- 10 عناصر - استبدل بالمحتوى الحقيقي (يمكن وضع background-image عبر style) -->
+        <div class="card best"><div class="badge">1</div><div class="overlay"><div class="title">قصة ممتازة 1</div></div></div>
+        <div class="card best"><div class="badge">2</div><div class="overlay"><div class="title">قصة ممتازة 2</div></div></div>
+        <div class="card best"><div class="badge">3</div><div class="overlay"><div class="title">قصة ممتازة 3</div></div></div>
+        <div class="card best"><div class="badge">4</div><div class="overlay"><div class="title">قصة ممتازة 4</div></div></div>
+        <div class="card best"><div class="badge">5</div><div class="overlay"><div class="title">قصة ممتازة 5</div></div></div>
+        <div class="card best"><div class="badge">6</div><div class="overlay"><div class="title">قصة ممتازة 6</div></div></div>
+        <div class="card best"><div class="badge">7</div><div class="overlay"><div class="title">قصة ممتازة 7</div></div></div>
+        <div class="card best"><div class="badge">8</div><div class="overlay"><div class="title">قصة ممتازة 8</div></div></div>
+        <div class="card best"><div class="badge">9</div><div class="overlay"><div class="title">قصة ممتازة 9</div></div></div>
+        <div class="card best"><div class="badge">10</div><div class="overlay"><div class="title">قصة ممتازة 10</div></div></div>
       </div>
     </section>
 
-    <!-- مثال لتصنيف: الأكثر مشاهدة مع زر عرض المزيد (سيتم تكراره لكل تصنيف) -->
+    <!-- الأكثر مشاهدة (10 + مزيد) -->
     <section id="popular" class="section">
       <div class="section-header">
         <h2>الأكثر مشاهدة</h2>
         <a class="more-btn" data-target="popularGrid">عرض المزيد</a>
       </div>
 
-      <!-- شريط أفقي أول 10 -->
-      <div class="carousel">
-        <!-- ضع 10 عناصر هنا -->
+      <div class="carousel" aria-label="الأكثر مشاهدة - أول 10">
+        <!-- 10 عناصر أولية -->
         <div class="card"><div class="title">شائع 1</div></div>
         <div class="card"><div class="title">شائع 2</div></div>
         <div class="card"><div class="title">شائع 3</div></div>
@@ -177,9 +135,8 @@
         <div class="card"><div class="title">شائع 10</div></div>
       </div>
 
-      <!-- شبكة كاملة تُعرض عند الضغط على عرض المزيد -->
-      <div id="popularGrid" class="grid" aria-hidden="true" style="display:none;">
-        <!-- هنا تظهر كل الأعمال المرتبة؛ أمثلة -->
+      <div id="popularGrid" class="grid" aria-hidden="true">
+        <!-- بقية الأعمال تظهر هنا عند الضغط (شبكة) -->
         <div class="card"><div class="title">شائع أ</div></div>
         <div class="card"><div class="title">شائع ب</div></div>
         <div class="card"><div class="title">شائع ج</div></div>
@@ -190,18 +147,17 @@
         <div class="card"><div class="title">شائع ح</div></div>
         <div class="card"><div class="title">شائع ط</div></div>
         <div class="card"><div class="title">شائع ي</div></div>
-        <!-- يمكن إضافة المزيد -->
+        <!-- إضافة عناصر أكثر هنا حسب الحاجة -->
       </div>
     </section>
 
-    <!-- أمثلة لتصنيفات متعددة (كل واحد بنفس النمط: شريط 10 + عرض المزيد) -->
+    <!-- تصنيفات: كل تصنيف يعرض أول 10 + زر المزيد -->
     <section class="section">
       <div class="section-header">
         <h2>كوميديا</h2>
         <a class="more-btn" data-target="comedyGrid">عرض المزيد</a>
       </div>
-      <div class="carousel">
-        <!-- 10 عناصر كوميديا -->
+      <div class="carousel" aria-label="كوميديا - أول 10">
         <div class="card"><div class="title">كوم 1</div></div>
         <div class="card"><div class="title">كوم 2</div></div>
         <div class="card"><div class="title">كوم 3</div></div>
@@ -213,7 +169,7 @@
         <div class="card"><div class="title">كوم 9</div></div>
         <div class="card"><div class="title">كوم 10</div></div>
       </div>
-      <div id="comedyGrid" class="grid" style="display:none;">
+      <div id="comedyGrid" class="grid" aria-hidden="true" style="display:none;">
         <div class="card"><div class="title">كوم أ</div></div>
         <div class="card"><div class="title">كوم ب</div></div>
         <div class="card"><div class="title">كوم ج</div></div>
@@ -223,11 +179,33 @@
 
     <section class="section">
       <div class="section-header">
+        <h2>شونين</h2>
+        <a class="more-btn" data-target="shonenGrid">عرض المزيد</a>
+      </div>
+      <div class="carousel" aria-label="شونين - أول 10">
+        <div class="card"><div class="title">شونين 1</div></div>
+        <div class="card"><div class="title">شونين 2</div></div>
+        <div class="card"><div class="title">شونين 3</div></div>
+        <div class="card"><div class="title">شونين 4</div></div>
+        <div class="card"><div class="title">شونين 5</div></div>
+        <div class="card"><div class="title">شونين 6</div></div>
+        <div class="card"><div class="title">شونين 7</div></div>
+        <div class="card"><div class="title">شونين 8</div></div>
+        <div class="card"><div class="title">شونين 9</div></div>
+        <div class="card"><div class="title">شونين 10</div></div>
+      </div>
+      <div id="shonenGrid" class="grid" aria-hidden="true" style="display:none;">
+        <div class="card"><div class="title">شون أ</div></div>
+        <div class="card"><div class="title">شون ب</div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
         <h2>دراما</h2>
         <a class="more-btn" data-target="dramaGrid">عرض المزيد</a>
       </div>
-      <div class="carousel">
-        <!-- 10 عناصر دراما -->
+      <div class="carousel" aria-label="دراما - أول 10">
         <div class="card"><div class="title">دراما 1</div></div>
         <div class="card"><div class="title">دراما 2</div></div>
         <div class="card"><div class="title">دراما 3</div></div>
@@ -239,56 +217,57 @@
         <div class="card"><div class="title">دراما 9</div></div>
         <div class="card"><div class="title">دراما 10</div></div>
       </div>
-      <div id="dramaGrid" class="grid" style="display:none;">
+      <div id="dramaGrid" class="grid" aria-hidden="true" style="display:none;">
         <div class="card"><div class="title">دراما أ</div></div>
         <div class="card"><div class="title">دراما ب</div></div>
       </div>
     </section>
 
-    <!-- المزيد من التصنيفات بنفس النمط حسب حاجتك -->
-    <section id="categories" class="section">
-      <div class="section-header"><h2>التصنيفات</h2></div>
-      <div class="categories">
-        <div class="category-card"><h3>مغامرات</h3><p>نص تعريفي قصير.</p></div>
-        <div class="category-card"><h3>خيال علمي</h3><p>نص تعريفي قصير.</p></div>
-        <div class="category-card"><h3>رومانسي</h3><p>نص تعريفي قصير.</p></div>
-        <div class="category-card"><h3>شونين</h3><p>نص تعريفي قصير.</p></div>
-      </div>
-    </section>
+    <!-- المزيد من التصنيفات حسب حاجتك -->
 
   </main>
 
   <footer>&copy; 2025 موقع قصصي — جميع الحقوق محفوظة</footer>
 
   <script>
-    // سلوك "عرض المزيد" عام لكل الأزرار
-    document.querySelectorAll('.more-btn').forEach(btn => {
-      btn.addEventListener('click', function(e){
-        e.preventDefault();
-        const targetId = btn.getAttribute('data-target');
-        if(!targetId) return;
-        const grid = document.getElementById(targetId);
-        if(!grid) return;
-        const shown = grid.style.display !== 'none' && grid.style.display !== '';
-        if(shown){
-          grid.style.display = 'none';
-          btn.textContent = 'عرض المزيد';
-          grid.setAttribute('aria-hidden','true');
-          // اختياري: تمرير لإرجاع
-          btn.scrollIntoView({behavior:'smooth', block:'center'});
-        } else {
-          grid.style.display = 'grid';
-          btn.textContent = 'عرض أقل';
-          grid.setAttribute('aria-hidden','false');
-          grid.scrollIntoView({behavior:'smooth', block:'start'});
-        }
-      });
-    });
+    // عام: أزرار "عرض المزيد" تفتح/تغلق الشبكة الخاصة بكل تصنيف
+    (function(){
+      const moreButtons = document.querySelectorAll('.more-btn');
+      moreButtons.forEach(btn=>{
+        btn.addEventListener('click', function(e){
+          e.preventDefault();
+          const targetId = btn.getAttribute('data-target');
+          if(!targetId) return;
+          const target = document.getElementById(targetId);
+          if(!target) return;
 
-    // زر القائمة (مكان لإضافة قائمة جانبية فيما بعد)
-    document.querySelectorAll('.menu-btn').forEach(b=>{
-      b.addEventListener('click', ()=> alert('اضغطت زر القائمة — ضع هنا فتح لوحة جانبية'));
-    });
+          // اغلق كل الشبكات المفتوحة الأخرى أول
+          document.querySelectorAll('.grid').forEach(g=>{
+            if(g.id !== targetId){ g.style.display = 'none'; g.setAttribute('aria-hidden','true'); }
+          });
+
+          const isOpen = target.style.display !== 'none' && target.style.display !== '';
+          if(isOpen){
+            target.style.display = 'none';
+            btn.textContent = 'عرض المزيد';
+            target.setAttribute('aria-hidden','true');
+          } else {
+            target.style.display = 'grid';
+            btn.textContent = 'عرض أقل';
+            target.setAttribute('aria-hidden','false');
+            target.scrollIntoView({behavior:'smooth', block:'start'});
+          }
+        });
+      });
+
+      // مثال بسيط لزر القائمة (يمكن تغييره ليفتح لوحة جانبية فعلية)
+      document.querySelectorAll('.menu-btn').forEach(b=>{
+        b.addEventListener('click', ()=> {
+          // هنا ضع كود فتح القائمة الجانبية أو نافذة منبثقة
+          alert('زر القائمة - ضع هنا كود فتح القائمة الجانبية');
+        });
+      });
+    })();
   </script>
 </body>
-  </html>
+</html>
