@@ -36,7 +36,7 @@
 
     /* carousel */
     .carousel{ display:flex; gap:14px; overflow-x:auto; padding-bottom:8px; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; }
-    .card{ flex:0 0 auto; scroll-snap-align:center; background:#fff; border-radius:12px; box-shadow:var(--card-shadow); min-width:150px; height:170px; display:flex; align-items:flex-end; justify-content:center; padding:12px; position:relative; color:var(--text); overflow:hidden; }
+    .card{ flex:0 0 auto; scroll-snap-align:center; background:#fff; border-radius:12px; box-shadow:var(--card-shadow); min-width:150px; height:170px; display:flex; align-items:flex-end; justify-content:center; padding:12px; position:relative; color:var(--text); overflow:hidden; transform:scale(1); transition: transform 220ms cubic-bezier(.2,.9,.2,1), box-shadow 220ms; }
     .card .title{ font-weight:700; font-size:14px; text-align:center; width:100% }
 
     /* best (10 items) bigger */
@@ -46,6 +46,9 @@
 
     .thumb{ position:absolute; inset:0; background-size:cover; background-position:center; filter:brightness(0.78); }
     .card .overlay{ position:relative; z-index:2 }
+
+    /* مركز العنصر: يكبر */
+    .card.active { transform: scale(1.08); z-index:3; box-shadow: 0 18px 34px rgba(10,10,10,0.18); }
 
     /* grid full view (hidden by default) */
     .grid{ display:none; margin-top:12px; gap:14px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
@@ -76,7 +79,8 @@
   <header class="banner" role="banner">
     <div class="banner-top">
       <button class="menu-btn" aria-label="قائمة">☰</button>
-      <div class="logo">قصصي</div>
+      <!-- استبدلت النص هنا بالشعار المطلوب -->
+      <div class="logo">لوفي البنات</div>
     </div>
     <div class="banner-content">
       <h1>مرحباً بك في عالم قصصي</h1>
@@ -100,7 +104,7 @@
       <div class="section-header"><h2>أفضل الأعمال لهذا الشهر</h2></div>
 
       <div class="carousel" id="bestCarousel" aria-label="أفضل الأعمال">
-        <!-- 10 عناصر - استبدل بالمحتوى الحقيقي (يمكن وضع background-image عبر style) -->
+        <!-- 10 عناصر - استبدل بالمحتوى الحقيقي -->
         <div class="card best"><div class="badge">1</div><div class="overlay"><div class="title">قصة ممتازة 1</div></div></div>
         <div class="card best"><div class="badge">2</div><div class="overlay"><div class="title">قصة ممتازة 2</div></div></div>
         <div class="card best"><div class="badge">3</div><div class="overlay"><div class="title">قصة ممتازة 3</div></div></div>
@@ -135,7 +139,7 @@
         <div class="card"><div class="title">شائع 10</div></div>
       </div>
 
-      <div id="popularGrid" class="grid" aria-hidden="true">
+      <div id="popularGrid" class="grid" aria-hidden="true" style="display:none;">
         <!-- بقية الأعمال تظهر هنا عند الضغط (شبكة) -->
         <div class="card"><div class="title">شائع أ</div></div>
         <div class="card"><div class="title">شائع ب</div></div>
@@ -147,11 +151,10 @@
         <div class="card"><div class="title">شائع ح</div></div>
         <div class="card"><div class="title">شائع ط</div></div>
         <div class="card"><div class="title">شائع ي</div></div>
-        <!-- إضافة عناصر أكثر هنا حسب الحاجة -->
       </div>
     </section>
 
-    <!-- تصنيفات: كل تصنيف يعرض أول 10 + زر المزيد -->
+    <!-- تصنيفات: نمط واحد لكل تصنيف -->
     <section class="section">
       <div class="section-header">
         <h2>كوميديا</h2>
@@ -173,7 +176,6 @@
         <div class="card"><div class="title">كوم أ</div></div>
         <div class="card"><div class="title">كوم ب</div></div>
         <div class="card"><div class="title">كوم ج</div></div>
-        <div class="card"><div class="title">كوم د</div></div>
       </div>
     </section>
 
@@ -223,8 +225,6 @@
       </div>
     </section>
 
-    <!-- المزيد من التصنيفات حسب حاجتك -->
-
   </main>
 
   <footer>&copy; 2025 موقع قصصي — جميع الحقوق محفوظة</footer>
@@ -260,13 +260,53 @@
         });
       });
 
-      // مثال بسيط لزر القائمة (يمكن تغييره ليفتح لوحة جانبية فعلية)
+      // زر القائمة (مكان لإضافة قائمة جانبية فيما بعد)
       document.querySelectorAll('.menu-btn').forEach(b=>{
         b.addEventListener('click', ()=> {
-          // هنا ضع كود فتح القائمة الجانبية أو نافذة منبثقة
-          alert('زر القائمة - ضع هنا كود فتح القائمة الجانبية');
+          // هنا ضع كود فتح القائمة الجانبية
+          alert('زر القائمة — ضع هنا كود فتح القائمة الجانبية');
         });
       });
+
+      // ===== خاص: تكبير العنصر الأوسط في Best Carousel =====
+      const bestCarousel = document.getElementById('bestCarousel');
+      if(bestCarousel){
+        const cards = Array.from(bestCarousel.querySelectorAll('.card'));
+
+        function updateActiveCard(){
+          // محاذاة منتصف الـ carousel
+          const carouselRect = bestCarousel.getBoundingClientRect();
+          const centerX = carouselRect.left + carouselRect.width / 2;
+
+          let closest = null;
+          let minDist = Infinity;
+          cards.forEach(card=>{
+            const rect = card.getBoundingClientRect();
+            const cardCenter = rect.left + rect.width / 2;
+            const dist = Math.abs(centerX - cardCenter);
+            if(dist < minDist){ minDist = dist; closest = card; }
+          });
+
+          // إزالة الفعالية عن الكل ثم إضافة للـ closest
+          cards.forEach(c=> c.classList.remove('active'));
+          if(closest) closest.classList.add('active');
+        }
+
+        // تحديث عند التمرير، التحميل، وإعادة الحجم
+        let rafId = null;
+        bestCarousel.addEventListener('scroll', ()=>{
+          if(rafId) cancelAnimationFrame(rafId);
+          rafId = requestAnimationFrame(updateActiveCard);
+        });
+        window.addEventListener('resize', ()=> {
+          if(rafId) cancelAnimationFrame(rafId);
+          rafId = requestAnimationFrame(updateActiveCard);
+        });
+        // تنفيذ أولي بعد تحميل الصفحة
+        window.addEventListener('load', ()=> {
+          setTimeout(updateActiveCard, 50);
+        });
+      }
     })();
   </script>
 </body>
