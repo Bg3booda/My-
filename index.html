@@ -1,64 +1,60 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html dir="rtl" lang="ar">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>قصصي</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-    }
-
-    /* البنر الجديد */
-    .banner {
-      background-color: #ddd; /* المساحة الرمادية */
-      color: #333;
-      padding: 60px 20px;
-      text-align: center;
-      position: relative;
-    }
-
-    /* اللوجو */
-    .banner .logo {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 50px;
-      height: auto;
-    }
-
-    /* زر القوائم */
-    .banner .menu-icon {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      font-size: 28px;
-      cursor: pointer;
-    }
-
-    /* نص الترحيب */
-    .banner h1 {
-      margin: 0;
-      font-size: 2.5em;
-    }
-
-    .banner p {
-      font-size: 1.2em;
-      margin-top: 10px;
-    }
-  </style>
+  <title>قصصي - الرئيسية</title>
+  <link rel="stylesheet" href="style.css"> <!-- ربط ملف CSS -->
 </head>
 <body>
 
-  <!-- البنر الجديد -->
-  <header class="banner">
-    <span class="menu-icon">☰</span>
-    <img src="logo.png" alt="شعار الموقع" class="logo">
-    <h1>مرحبًا بكم في قصصي</h1>
-    <p>منصة للقصص العربية والرسوم المصورة</p>
+  <!-- الهيدر -->
+  <header>
+    <nav>
+      <div class="nav-right">
+        <div class="logo">قصصي</div>
+        <ul class="nav-links">
+          <li><a href="index.html">الرئيسية</a></li>
+          <li><a href="categories.html">التصنيفات</a></li>
+          <li><a href="about.html">عن الموقع</a></li>
+          <li><a href="contact.html">اتصل بنا</a></li>
+        </ul>
+      </div>
+      <div class="nav-left">
+        <button class="menu-icon">☰</button>
+        <div class="profile-icon">ق</div>
+      </div>
+    </nav>
   </header>
+
+  <!-- البنر -->
+  <section class="banner">
+    <div class="banner-content">
+      <h1>مرحباً بك في عالم قصصي</h1>
+      <p>اكتشف أجمل القصص المصورة العربية</p>
+    </div>
+  </section>
+
+  <!-- أفضل الأعمال -->
+  <section class="section">
+    <h2 class="section-title">أفضل الأعمال لهذا الشهر</h2>
+    <div class="best-month-grid">
+      <!-- هنا الأعمال -->
+    </div>
+  </section>
+
+  <!-- القصص الشعبية -->
+  <section class="section">
+    <h2 class="section-title">الأعمال الأكثر شعبية</h2>
+    <div class="popular-strip">
+      <!-- هنا الأعمال -->
+    </div>
+  </section>
+
+  <!-- الفوتر -->
+  <footer>
+    <p>&copy; 2025 موقع قصصي - جميع الحقوق محفوظة</p>
+  </footer>
 
 </body>
 </html>
